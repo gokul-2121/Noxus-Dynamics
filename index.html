@@ -7,38 +7,83 @@
     <meta name="description" content="Noxus Dynamics is Kerala's premier robotics innovation lab based in Kottayam." />
     <link rel="icon" type="image/jpeg" href="assets/team/assetslogo.jpg.jpg" />
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#d7bbf5",
+              surface: "#131318",
+              "on-surface-variant": "#ccc4cf",
+            },
+            fontFamily: {
+              "display-xl": ["Bodoni Moda", "serif"],
+              "label-accent": ["Space Grotesk", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Hero Styles -->
+    <style>
+        .hero-bg {
+            background: radial-gradient(circle at center, rgba(157, 132, 186, 0.25) 0%, #25103f 70%, #131318 100%);
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, rgba(157, 132, 186, 0.03) 0px, rgba(157, 132, 186, 0.03) 2px, transparent 2px, transparent 40px);
+            background-size: 100% 100%;
+            animation: stripe-flow 15s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes stripe-flow { 0% { background-position: 0 0; } 100% { background-position: 40px 0; } }
+        .marquee-container { position: absolute; top: 50%; left: 0; width: 100%; transform: translateY(-50%); display: flex; overflow: hidden; pointer-events: none; opacity: 0.15; z-index: 0; }
+        .marquee-content { display: flex; white-space: nowrap; animation: scroll-horizontal 30s linear infinite; }
+        .marquee-text { font-family: 'Bodoni Moda', serif; font-weight: 800; font-size: 140px; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1.5px #d7bbf5; padding: 0 40px; }
+        @keyframes scroll-horizontal { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .anim-fade-up { animation: fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(40px); }
+        @keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+        .glass-panel { background: rgba(37, 16, 63, 0.4); backdrop-filter: blur(24px); border: 1px solid rgba(215, 187, 245, 0.2); }
+    </style>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-
-    <!-- Top Nav Bar -->
-    <nav class="topbar">
-        <div class="topbar-left logo-wrapper">
-            <img src="assets/team/assetslogo.jpg.jpg" alt="Noxus Dynamics" class="logo-img" />
-            <span class="logo-text">NOXUS DYNAMICS</span>
+<body class="antialiased text-[#e4e1e9]">
+    <!-- New Simple & Unique Hero Navbar -->
+    <nav class="fixed top-0 w-full px-6 py-6 z-50 transition-all duration-300 anim-fade-up" style="animation-delay: 0.2s;" id="globalNav">
+        <div class="glass-panel flex justify-between items-center max-w-7xl mx-auto rounded-xl p-4">
+            <div class="flex items-center gap-4">
+                <img src="assets/team/assetslogo.jpg.jpg" alt="Noxus Dynamics" class="h-10 w-10 rounded-full" />
+                <span class="font-display-xl font-bold tracking-wider text-xl text-primary">NOXUS DYNAMICS</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-accent uppercase tracking-widest text-sm">About</a>
+                <a href="#services" class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-accent uppercase tracking-widest text-sm">Services</a>
+                <a href="#team" class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-accent uppercase tracking-widest text-sm">Team</a>
+            </div>
+            <div class="hidden md:flex items-center">
+                <a href="#contact" class="glass-panel px-6 py-2 rounded-full font-label-accent text-primary hover:bg-white/5 transition-all duration-300 text-sm">Contact Us</a>
+            </div>
+            <button class="md:hidden text-primary p-2"><span class="material-symbols-outlined">menu</span></button>
         </div>
-        <div class="topbar-center">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#team" class="nav-link">Team</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </div>
-        <div class="topbar-right">
-            <span class="nav-tag">Kottayam, Kerala</span>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <span></span><span></span>
-        </button>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden">
         <a href="#about" class="mobile-link">About</a>
         <a href="#services" class="mobile-link">Services</a>
         <a href="#team" class="mobile-link">Team</a>
@@ -46,41 +91,32 @@
     </div>
 
     <main>
-        <!-- SECTION 1: Full-Bleed Hero -->
-        <section id="home" class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-overlay">
-                <div class="hero-content">
-                    <p class="hero-eyebrow">Robotics Innovation Lab</p>
-                    <h1>Build at<br/>the Edge.</h1>
-                    <p class="hero-sub">Pioneering Agritech, Prosthetics &amp; Autonomous Systems from Kerala, India.</p>
-                </div>
+        <!-- Simple & Elegant Hero -->
+        <section id="home" class="hero-bg relative flex flex-col items-center justify-center min-h-[100vh] w-full overflow-hidden">
+            <!-- Particle Canvas Background -->
+            <canvas id="aether-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+            
+            <div class="max-w-7xl mx-auto w-full flex flex-col items-center justify-center relative z-10 px-4">
 
-                <!-- Thumbnail Strip at Bottom -->
-                <div class="hero-thumbs">
-                    <div class="thumb active">
-                        <div class="thumb-img t1"></div>
-                        <span>Agritech</span>
-                    </div>
-                    <div class="thumb">
-                        <div class="thumb-img t2"></div>
-                        <span>Prosthetics</span>
-                    </div>
-                    <div class="thumb">
-                        <div class="thumb-img t3"></div>
-                        <span>Autonomy</span>
-                    </div>
-                    <div class="thumb">
-                        <div class="thumb-img t4"></div>
-                        <span>R&amp;D</span>
-                    </div>
+                <h1 class="font-display-xl text-center opacity-95 anim-fade-up mix-blend-screen text-[clamp(4rem,10vw,8rem)] leading-[1.1] tracking-tighter" style="animation-delay: 0.4s; text-shadow: 0 0 40px rgba(215, 187, 245, 0.4);">
+                    NOXUS DYNAMICS
+                </h1>
+                <p class="font-label-accent text-on-surface-variant text-center max-w-2xl mt-8 mb-10 text-lg leading-relaxed tracking-wider anim-fade-up" style="animation-delay: 0.6s;">
+                    Pioneering Agritech, Prosthetics &amp; Autonomous Systems from Kerala, India.
+                </p>
+                
+                <div class="anim-fade-up" style="animation-delay: 0.8s;">
+                    <a href="#services" class="px-8 py-4 bg-white text-black font-label-accent font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center gap-2 mx-auto w-fit">
+                        Explore the Engine
+                        <span class="material-symbols-outlined text-[1.25rem]">arrow_forward</span>
+                    </a>
                 </div>
             </div>
-
+            
             <!-- Scroll Indicator -->
-            <div class="scroll-cue">
-                <span>Scroll</span>
-                <div class="scroll-line"></div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 anim-fade-up" style="animation-delay: 1.2s;">
+                <span class="font-label-accent text-[10px] text-primary uppercase tracking-widest opacity-70">Scroll</span>
+                <div class="w-[1px] h-12 bg-gradient-to-b from-primary/50 to-transparent"></div>
             </div>
         </section>
 
@@ -255,5 +291,152 @@
     </footer>
 
     <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById('aether-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const mouse = { x: null, y: null, radius: 200 };
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+
+                update() {
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.directionX = -this.directionX;
+                    }
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.directionY = -this.directionY;
+                    }
+
+                    if (mouse.x !== null && mouse.y !== null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius + this.size) {
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            this.x -= forceDirectionX * force * 5;
+                            this.y -= forceDirectionY * force * 5;
+                        }
+                    }
+
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function init() {
+                particles = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * 0.4) - 0.2;
+                    let directionY = (Math.random() * 0.4) - 0.2;
+                    let color = 'rgba(215, 187, 245, 0.8)';
+                    particles.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            const resizeCanvas = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init(); 
+            };
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const connect = () => {
+                let opacityValue = 1;
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                            + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                        
+                        if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                            opacityValue = 1 - (distance / 20000);
+                            
+                            let dx_mouse_a = particles[a].x - mouse.x;
+                            let dy_mouse_a = particles[a].y - mouse.y;
+                            let distance_mouse_a = Math.sqrt(dx_mouse_a*dx_mouse_a + dy_mouse_a*dy_mouse_a);
+
+                            if (mouse.x && distance_mouse_a < mouse.radius) {
+                                 ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue})`;
+                            } else {
+                                 ctx.strokeStyle = `rgba(157, 132, 186, ${opacityValue})`;
+                            }
+                            
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            };
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                }
+                connect();
+            };
+            
+            const handleMouseMove = (event) => {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+            };
+            
+            const handleMouseOut = () => {
+                mouse.x = null;
+                mouse.y = null;
+            };
+
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseout', handleMouseOut);
+
+            init();
+            animate();
+        });
+    </script>
+    <script>
+        // Subtle scroll effect for nav
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('globalNav');
+            const inner = nav.querySelector('div');
+            if (window.scrollY > 50) {
+                inner.classList.add('bg-[#1f1f24]/90');
+                inner.classList.remove('bg-[rgba(37,16,63,0.4)]');
+            } else {
+                inner.classList.add('bg-[rgba(37,16,63,0.4)]');
+                inner.classList.remove('bg-[#1f1f24]/90');
+            }
+        });
+    </script>
 </body>
 </html>

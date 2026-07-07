@@ -1,12 +1,31 @@
 :root {
-    --bg: #0a0a0a;
-    --bg-card: #111111;
-    --text: #ffffff;
-    --text-dim: #888888;
-    --font-h: 'Space Grotesk', sans-serif;
-    --font-b: 'JetBrains Mono', monospace;
+    --bg: #131318;
+    --bg-card: rgba(37, 16, 63, 0.4);
+    --text: #e4e1e9;
+    --text-dim: #ccc4cf;
+    --font-h: 'Bodoni Moda', serif;
+    --font-b: 'Hanken Grotesk', sans-serif;
+    --accent: #d7bbf5;
 }
 
+/* Tailwind Preflight Fallbacks for Legacy Sections */
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+.section h2, .section-head h2 {
+    margin-bottom: 1rem;
+}
+.section h3, .card-body h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.team-info h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -120,7 +139,7 @@ body {
     display: none;
     position: fixed;
     inset: 0;
-    background: var(--bg);
+    background: rgba(10, 10, 10, 0.95);
     z-index: 105;
     flex-direction: column;
     justify-content: center;
@@ -149,9 +168,7 @@ body {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background:
-        linear-gradient(135deg, rgba(20,20,30,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(5,5,5,0.8) 100%),
-        url('../assets/team/hero-bg.jpg.jpeg') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(20,20,30,0.7) 0%, rgba(10,10,10,0.4) 50%, rgba(5,5,5,0.8) 100%);
     background-size: cover;
 }
 
@@ -468,13 +485,19 @@ body {
 }
 
 /* ==================== TEAM GRID ==================== */
+.team .section-head {
+    text-align: center;
+}
+
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
 }
 
 .team-card {
+    flex: 0 1 calc(25% - 1.125rem);
     background: var(--bg-card);
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 0;
@@ -531,41 +554,7 @@ body {
     justify-content: center;
 }
 
-/* Scan-line on team hover */
-.team-photo::after {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    z-index: 4;
-    pointer-events: none;
-}
 
-.team-card:hover .team-photo::after {
-    animation: scanLine 1s ease-in-out;
-}
-
-/* Data overlay on hover */
-.team-photo::before {
-    content: 'SCANNING...';
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    font-size: 0.55rem;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,0);
-    z-index: 4;
-    font-family: var(--font-b);
-    transition: color 0.2s ease;
-    pointer-events: none;
-}
-
-.team-card:hover .team-photo::before {
-    color: rgba(255,255,255,0.5);
-}
 
 .team-photo .initials {
     position: absolute;
@@ -715,7 +704,7 @@ footer {
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
-    .team-grid { grid-template-columns: repeat(3, 1fr); }
+    .team-card { flex: 0 1 calc(33.333% - 1rem); }
 }
 
 @media (max-width: 768px) {
@@ -733,7 +722,7 @@ footer {
     .card-grid { grid-template-columns: 1fr; }
     .card-large { grid-row: span 1; }
     .card-large .card-visual { min-height: 200px; }
-    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-card { flex: 0 1 calc(50% - 0.75rem); }
 
     .section h2, .section-head h2 { font-size: 2rem; }
     .section { padding: 5rem 0; }
